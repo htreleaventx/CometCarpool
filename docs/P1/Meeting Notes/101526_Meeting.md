@@ -1,4 +1,4 @@
-# Meeting Notes | October 15, 2026
+# Meeting Notes | October 15, 2026 | 7:30PM
 
 ## Information
 GitHub was created, please answer and place your markdown files for each section in the corresponding section folder `docs/P1/Section X`. This is so we can track who is doing what and contributing so they get their credit. Once all the sections are completed I (Hunter) will update the word document to reflect those sections so it doesn't create a huge mess. If you have any questions or concerns please reach out. PLEASE note if you are using AI, its okay to use it to help but not do it all (just please note it as we need to for section 5). Also see below for the roles, goals, and next meeting date.  
