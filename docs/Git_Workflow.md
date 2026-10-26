@@ -4,7 +4,17 @@
 
 The purpose of this document is to define the Git and GitHub workflow that the Comet Carpool team will use during development.
 
-The `main` branch will remain protected. Team members should make changes on separate branches and submit pull requests before changes are merged into `main`.
+The `main` branch will remain protected.
+
+Team members must:
+
+- Start from the latest version of `main`
+- Create their own branch for assigned work
+- Make and commit changes on that branch
+- Push the branch to GitHub
+- Create a pull request into `main`
+
+The Project Manager will review and merge pull requests into `main`.
 
 ---
 
@@ -16,6 +26,8 @@ Before creating a new branch, make sure your local `main` branch is up to date.
 git switch main
 git pull
 ```
+
+This ensures that the new branch is created from the latest version of the project.
 
 ---
 
@@ -39,6 +51,8 @@ docs/p2-update
 ```
 
 Each branch should focus on one feature, fix, or documentation task.
+
+Do not perform project work directly on `main`.
 
 ---
 
@@ -107,30 +121,37 @@ feature/your-branch → main
 6. Add a short description explaining what was changed.
 7. Submit the pull request.
 
+Team members may create pull requests, but they should not merge their own pull requests.
+
 ---
 
 ## 8. Pull Request Review
 
 Pull requests must be reviewed before they are merged into `main`.
 
-The reviewer should:
+The Project Manager is responsible for reviewing pull requests.
+
+The Project Manager should:
 
 - Review the changed files
-- Confirm the changes match the task requirements
+- Confirm the changes match the assigned task
 - Test the changes when necessary
 - Leave comments if corrections are needed
 - Confirm review conversations are resolved
 - Approve the pull request once the changes are ready
+- Merge the pull request into `main`
 
 If changes are requested, the developer should make the corrections on the same branch and push the new commits.
 
 The pull request will automatically update with the new commits.
 
+Team members should not merge their own pull requests.
+
 ---
 
 ## 9. Merge Into Main
 
-Once the pull request has been reviewed and approved, it can be merged into `main`.
+Once the pull request has been reviewed and approved by the Project Manager, the Project Manager will merge it into `main`.
 
 The team should use a **merge commit** when merging pull requests.
 
@@ -142,55 +163,78 @@ Do not use squash merging unless the team decides to change this workflow later.
 
 ## 10. After the Pull Request Is Merged
 
-After the pull request is merged, update your local `main` branch before starting another task.
+After the pull request is merged, the completed branch can be deleted from GitHub.
+
+Deleting a merged branch does not remove the commits from `main`.
+
+The contributor's:
+
+- Commit history
+- Commit messages
+- Authorship
+- Contribution history
+
+will remain available after the branch is deleted.
+
+Before starting another task, update your local `main` branch:
 
 ```bash
 git switch main
 git pull
 ```
 
-Then create a new branch for the next task.
+Then create a new branch for the next task:
 
 ```bash
 git switch -c feature/new-feature
 ```
 
-The previous feature branch can be deleted after it has been successfully merged.
-
 ---
 
 ## 11. Keeping Your Branch Updated
 
-If other changes are merged into `main` while you are still working on your branch, you may need to update your branch.
-
-First update your local `main` branch:
+If other changes are merged into `main` while you are still working on your branch, update your local `main` branch first.
 
 ```bash
 git switch main
 git pull
 ```
 
-Then return to your feature branch:
+Then return to your working branch:
 
 ```bash
 git switch feature/your-branch
 ```
 
-Merge the updated `main` branch into your feature branch:
+Rebase your branch onto the updated `main` branch:
 
 ```bash
-git merge main
+git rebase main
 ```
 
-If there are merge conflicts, resolve them before continuing.
+If there are merge conflicts, Git will stop and allow you to resolve them.
 
-After resolving conflicts:
+After fixing the conflicts, stage the resolved files:
 
 ```bash
 git add .
-git commit -m "Resolved merge conflicts with main"
-git push
 ```
+
+Then continue the rebase:
+
+```bash
+git rebase --continue
+```
+
+Once the rebase is complete, push the updated branch.
+
+If the branch had already been pushed before the rebase, use:
+
+```bash
+git push --force-with-lease
+```
+
+Do not use a regular `--force` push.
 
 ---
 
@@ -255,7 +299,7 @@ Clear commit messages make it easier to review project history and document indi
 
 The `main` branch is protected to reduce the risk of incomplete or broken changes being added directly to the main project.
 
-Changes to `main` should go through the pull request process.
+All changes to `main`, including documentation changes, should go through the pull request process.
 
 The branch protection rules are intended to:
 
@@ -263,9 +307,11 @@ The branch protection rules are intended to:
 - Require pull requests before merging
 - Require review before merging
 - Require review conversations to be resolved
-- Prevent force pushes
+- Prevent force pushes to `main`
 - Prevent accidental deletion of `main`
 - Keep the main branch stable
+
+The Project Manager is responsible for approving and merging pull requests into `main`.
 
 ---
 
@@ -274,9 +320,9 @@ The branch protection rules are intended to:
 The standard development workflow should be:
 
 ```text
-Update local main
+Pull latest main
         ↓
-Create new branch
+Create a new branch from main
         ↓
 Make changes
         ↓
@@ -284,17 +330,19 @@ Commit changes
         ↓
 Push branch to GitHub
         ↓
-Create pull request
+Create pull request into main
         ↓
-Review and test
+Project Manager reviews
         ↓
-Resolve review comments
+Resolve requested changes if needed
         ↓
-Approve pull request
+Project Manager approves
         ↓
-Merge into main
+Project Manager merges into main
         ↓
-Update local main
+Delete merged branch
+        ↓
+Pull latest main before next task
 ```
 
 ---
@@ -303,12 +351,19 @@ Update local main
 
 - Do not work directly on `main`
 - Do not push directly to `main`
+- Always pull the latest version of `main` before creating a new branch
 - Create a separate branch for each feature, fix, or documentation task
 - Keep branch names clear and descriptive
 - Use meaningful commit messages
 - Push your branch regularly
-- Create a pull request before changes are merged
+- All changes, including documentation changes, must use a pull request
+- Team members may create pull requests
+- Team members should not merge their own pull requests
+- The Project Manager reviews and merges pull requests into `main`
 - Resolve review comments before merging
 - Test changes before approving a pull request
 - Use merge commits so individual contributions remain visible
+- Do not squash commits unless the team decides to change the workflow
+- Delete completed branches after they have been successfully merged
+- Deleting a merged branch does not remove contributor commit history
 - Update your local `main` branch before starting new work
