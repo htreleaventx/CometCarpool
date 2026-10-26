@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MarkdownSettings">
+    <option name="customStylesheetText" value="table th {&#10;    text-align: left !important;&#10;    vertical-align: top !important;&#10;}&#10;&#10;table td {&#10;    vertical-align: top !important;&#10;}" />
+    <option name="useCustomStylesheetText" value="true" />
+  </component>
+</project>
