@@ -12,14 +12,14 @@ of the P1 requirements document.
 https://drive.google.com/file/d/1wobv34eZ9E8-XSRS9qzyEhtitImAau3h/view?usp=sharing
 
 ## Workflow Description
-1. A student registers or logs into the system.
-2. Drivers can post available rides.
-3. Riders can search for rides or post requests.
+1. A student registers or logs into the system using their UTD email.
+2. Drivers can post available rides. They must provide details such as date, time, starting location, destination, and number of available seats.
+3. Riders can search for rides or post requests. They can filter results by the aforementioned details.
 4. Students can manage recurring schedules
-   and find compatible matches.
+   and find compatible matches. When matching, they can agree to split travel costs.
 5. Riders and drivers can coordinate through
    in-app messaging.
-6. After a completed ride, users can submit
+6. After a completed ride, users must mark the ride as complete. They can also submit
    ratings and reviews.
 7. Users can report ride-related or safety issues.
 
