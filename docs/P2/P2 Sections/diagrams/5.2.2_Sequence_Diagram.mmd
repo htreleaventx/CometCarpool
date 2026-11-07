@@ -1,0 +1,33 @@
+sequenceDiagram
+    actor R as Student Rider
+    participant SC as :Schedule Screen
+    participant SM as :Schedule Manager
+    participant RS as :Recurring Schedule
+    participant DA as :Driver Availability
+    participant PM as :Potential Match
+    participant MS as :Match Results Screen
+
+    Note over R,MS: Step 6 - Validate and save the rider's recurring schedule
+    R->>SC: (5) save recurring schedule (days and times)
+    SC->>SM: 6.1 send selected days and times
+    SM->>RS: 6.2 validate days and times are complete
+    RS-->>SM: valid (or missing information)
+    SM->>RS: 6.3 store recurring schedule for the rider
+    SM->>SC: 6.4 display save confirmation
+
+    Note over R,MS: Step 8 - Compare rider needs with driver availability
+    R->>SC: (7) select "find compatible schedules"
+    SC->>SM: 8.1 request compatible matches
+    SM->>RS: 8.2 retrieve rider's days and times
+    RS-->>SM: rider's recurring schedule
+    SM->>DA: 8.3 find availability sharing a day and overlapping times
+    DA-->>SM: compatible driver availability (may be none)
+    SM->>PM: 8.4 create potential matches (day, times, driver)
+    SM->>MS: 8.5 display potential matches (or "no compatible schedules")
+
+    Note over R,MS: Step 10 - Show the selected driver's ride information
+    R->>MS: (9) select a potential driver
+    MS->>SM: 10.1 request selected driver's ride information
+    SM->>PM: 10.2 retrieve selected match
+    SM->>DA: 10.3 retrieve driver's availability details
+    SM->>MS: 10.4 display driver ride information and option to coordinate (UC-05)
