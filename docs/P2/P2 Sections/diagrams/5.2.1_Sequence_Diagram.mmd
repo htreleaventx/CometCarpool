@@ -1,0 +1,31 @@
+sequenceDiagram
+    actor R as Student Rider
+    participant SS as :Ride Search Screen
+    participant RM as :Ride Request Manager
+    participant RD as :Ride
+    participant RF as :Ride Request Form
+    participant RQ as :Ride Request
+    participant CS as :Request Confirmation Screen
+
+    Note over R,CS: Step 2 - Search for matching rides
+    R->>SS: (1) enter pickup, destination, date, time
+    SS->>RM: 2.1 send search criteria
+    RM->>RD: 2.2 find rides matching criteria
+    RD-->>RM: matching rides (may be none)
+    RM->>SS: 2.3 display matching rides (or "no matches found")
+
+    Note over R,CS: Steps 3-5 - Rider chooses to create a request and fills the form
+    R->>RF: (5) enter trip details and submit
+
+    Note over R,CS: Step 6 - Validate and save the ride request
+    RF->>RM: 6.1 send trip details
+    RM->>RQ: 6.2 validate required trip details
+    RQ-->>RM: valid (or list of missing fields)
+    RM->>RQ: 6.3 save request as open, owned by the rider
+
+    Note over R,CS: Step 8 - Confirm the posted request
+    R->>CS: (7) view submitted request
+    CS->>RM: 8.1 request the saved ride request
+    RM->>RQ: 8.2 retrieve request and status
+    RQ-->>RM: request details, visible to eligible drivers
+    RM->>CS: 8.3 display confirmation that request is posted
